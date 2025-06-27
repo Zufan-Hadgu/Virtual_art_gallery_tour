@@ -6,15 +6,26 @@ import Lights from './components/Lights';
 
 function App() {
   return (
-    <Canvas shadows camera={{ position: [0, 3, 10], fov: 50 }}>
+    <Canvas shadows camera={{ position: [0, 4, 20], fov: 45 }}>
       <color attach="background" args={['#111111']} />
       <Lights />
       <GalleryRoom />
 
-      {/* Sample artwork */}
-      <ArtworkFrame textureUrl="/assets/images/art1.jpg" position={[-5, 1.5, -9.9]} />
-      <ArtworkFrame textureUrl="/assets/images/art2.jpg" position={[0, 1.5, -9.9]} />
-      <ArtworkFrame textureUrl="/assets/images/art3.jpg" position={[5, 1.5, -9.9]} />
+  
+      <ArtworkFrame textureUrl="/assets/images/art1.jpg" position={[-6, 2.5, -14.95]} />
+      <ArtworkFrame textureUrl="/assets/images/art2.jpg" position={[0, 2.5, -14.95]} />
+      <ArtworkFrame textureUrl="/assets/images/art3.jpg" position={[6, 2.5, -14.95]} />
+
+<ArtworkFrame textureUrl="/assets/images/art4.jpg" position={[-11.95, 2.5, -6]} rotation={[0, Math.PI / 2, 0]} />
+<ArtworkFrame textureUrl="/assets/images/art5.jpg" position={[-11.95, 2.5, 0]} rotation={[0, Math.PI / 2, 0]} />
+<ArtworkFrame textureUrl="/assets/images/art6.jpg" position={[-11.95, 2.5, 6]} rotation={[0, Math.PI / 2, 0]} />
+
+<ArtworkFrame textureUrl="/assets/images/art5.jpg" position={[11.95, 2.5, -6]} rotation={[0, -Math.PI / 2, 0]} />
+<ArtworkFrame textureUrl="/assets/images/art4.jpg" position={[11.95, 2.5, 0]} rotation={[0, -Math.PI / 2, 0]} />
+<ArtworkFrame textureUrl="/assets/images/art6.jpg" position={[11.95, 2.5, 6]} rotation={[0, -Math.PI / 2, 0]} />
+
+      <ArtworkFrame textureUrl="/assets/images/art1.jpg" position={[0.75, 2.5, -5]} rotation={[0, -Math.PI / 2, 0]} />
+      <ArtworkFrame textureUrl="/assets/images/art2.jpg" position={[-0.75, 2.5, 5]} rotation={[0, Math.PI / 2, 0]} />
 
       <OrbitControls />
     </Canvas>
