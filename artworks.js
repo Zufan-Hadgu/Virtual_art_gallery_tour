@@ -4,7 +4,11 @@ const loader = new THREE.TextureLoader();
 
 function addArt(scene, img, pos, rot = [0, 0, 0], size = [2, 2.5, 0.1]) {
   const tex = loader.load(img);
-  const mat = new THREE.MeshStandardMaterial({ map: tex });
+  const mat = new THREE.MeshStandardMaterial({
+    map: tex,
+    roughness: 1,    
+    metalness: 0      
+  });
   const mesh = new THREE.Mesh(new THREE.BoxGeometry(...size), mat);
   mesh.position.set(...pos);
   mesh.rotation.set(...rot);
@@ -13,17 +17,28 @@ function addArt(scene, img, pos, rot = [0, 0, 0], size = [2, 2.5, 0.1]) {
 }
 
 export function addAllArtworks(scene) {
+  // === Room 1: Back Wall ===
   addArt(scene, 'assets/art1.jpg', [-6, 2.0, -14.95]);
   addArt(scene, 'assets/art2.jpg', [0, 2.0, -14.95]);
   addArt(scene, 'assets/art3.jpg', [6, 2.0, -14.95]);
-  addArt(scene, 'assets/art4.jpg', [-11.9, 2.0, -12], [0, Math.PI / 2, 0]);  
-  addArt(scene, 'assets/art5.jpg', [-11.9, 2.0, 12], [0, Math.PI / 2, 0]);  
 
-  addArt(scene, 'assets/art6.jpg', [-35.9, 2.0, 0], [0, Math.PI / 2, 0]);
+  // === Room 1: Left Wall (around door)
+  addArt(scene, 'assets/art4.jpg', [-11.9, 2.0, -12], [0, Math.PI / 2, 0]);
+  addArt(scene, 'assets/art5.jpg', [-11.9, 2.0, 12], [0, Math.PI / 2, 0]);
 
+ 
   addArt(scene, 'assets/art5.jpg', [11.9, 2.0, -6], [0, -Math.PI / 2, 0]);
   addArt(scene, 'assets/art4.jpg', [11.9, 2.0, 0], [0, -Math.PI / 2, 0]);
   addArt(scene, 'assets/art6.jpg', [11.9, 2.0, 6], [0, -Math.PI / 2, 0]);
-  addArt(scene, 'assets/art1.jpg', [0.75, 1.5, -5], [0, -Math.PI / 2, 0]);
-  addArt(scene, 'assets/art2.jpg', [-0.75, 1.5, 5], [0, Math.PI / 2, 0]);
+ 
+  addArt(scene, 'assets/art1.jpg', [0.07, 1.5, -5], [0, -Math.PI / 2, 0]);
+  addArt(scene, 'assets/art3.jpg', [-0.07, 1.5, -5], [0, Math.PI / 2, 0]);
+  addArt(scene, 'assets/art2.jpg', [-0.07, 1.5, 5], [0, Math.PI / 2, 0]);
+  addArt(scene, 'assets/art9.jpg', [0.07, 1.5, 5], [0, -Math.PI / 2, 0]);
+ 
+  const offset = -24;
+  addArt(scene, 'assets/art10.jpg', [offset + 0.07, 1.5, -5], [0, -Math.PI / 2, 0]);
+  addArt(scene, 'assets/art11.jpg', [offset - 0.07, 1.5, -5], [0, Math.PI / 2, 0]);
+  addArt(scene, 'assets/art9.jpg', [offset - 0.07, 1.5, 5], [0, Math.PI / 2, 0]);
+  addArt(scene, 'assets/art7.webp', [offset + 0.07, 1.5, 5], [0, -Math.PI / 2, 0]);
 }
