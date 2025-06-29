@@ -36,6 +36,23 @@ function addArt(scene, img, pos, rot = [0, 0, 0], size = [2, 2.5, 0.1]) {
   scene.add(mesh);
 }
 
+function addVase(scene, position, scale = 0.5, rotationY = 0) {
+  gltfLoader.load('assets/vase_with_flower.glb', gltf => {
+    const model = gltf.scene;
+    model.scale.set(scale, scale, scale);
+    model.position.set(...position);
+    model.rotation.y = rotationY;
+    model.traverse(child => {
+      if (child.isMesh) {
+        child.castShadow = true;
+        child.receiveShadow = true;
+      }
+    });
+    scene.add(model);
+  });
+}
+
+
 
 function addHangingArt(scene, img, anchorPos, cableLength = 2.5, frameSize = [2, 2.5, 0.1]) {
   const tex = loader.load(img);
@@ -61,10 +78,51 @@ function addHangingArt(scene, img, anchorPos, cableLength = 2.5, frameSize = [2,
   scene.add(frame, cable1, cable2);
 }
 
+function addMuseumBench(scene, position, length = 2.5, rotationY = 0, color = 0x444444) {
+  const benchGroup = new THREE.Group();
+  const mat = new THREE.MeshStandardMaterial({ color, roughness: 0.6 });
+
+  // Seat
+  const seat = new THREE.Mesh(
+    new THREE.BoxGeometry(length, 0.1, 0.5),
+    mat
+  );
+  seat.position.set(0, 0, 0);
+  seat.castShadow = true;
+  seat.receiveShadow = true;
+  benchGroup.add(seat);
+
+  // Legs
+  const legGeometry = new THREE.BoxGeometry(0.1, 0.4, 0.1);
+  const legOffsets = [
+    [-length / 2 + 0.15, -0.25, -0.2],
+    [ length / 2 - 0.15, -0.25, -0.2],
+    [-length / 2 + 0.15, -0.25,  0.2],
+    [ length / 2 - 0.15, -0.25,  0.2],
+  ];
+
+  for (const [x, y, z] of legOffsets) {
+    const leg = new THREE.Mesh(legGeometry, mat);
+    leg.position.set(x, y, z);
+    leg.castShadow = true;
+    leg.receiveShadow = true;
+    benchGroup.add(leg);
+  }
+
+  // Set final position and rotation
+  benchGroup.position.set(...position);
+  benchGroup.rotation.y = rotationY;
+
+  scene.add(benchGroup);
+}
+
+
+
+
 export function addAllArtworks(scene) {
   // === Room 1: Back Wall ===
-  addArt(scene, 'assets/art1.jpg', [-6, 2.0, -14.95]);
-  addArt(scene, 'assets/art2.jpg', [0, 2.0, -14.95]);
+  addArt(scene, 'assets/art21.jpg', [-6, 2.0, -14.95]);
+  addArt(scene, 'assets/art8.jpg', [0, 2.0, -14.95]);
   addArt(scene, 'assets/art3.jpg', [6, 2.0, -14.95]);
 
   // === Room 1: Left Wall (around door)
@@ -90,8 +148,8 @@ export function addAllArtworks(scene) {
   // Left white wall in Room 2 (x = -34), nicely spaced
 addArt(scene, 'assets/art15.jpg', [-34, 2.0, -6], [0, Math.PI / 2, 0]);
 addArt(scene, 'assets/art16.jpg', [-34, 2.0, 0], [0, Math.PI / 2, 0]);
-addArt(scene, 'assets/art8.jpg', [-34, 2.0, 6], [0, Math.PI / 2, 0]);
-addArt(scene, 'assets/art17.jpg', [-34, 2.0, 12], [0, Math.PI / 2, 0]);
+addArt(scene, 'assets/art19.jpg', [-34, 2.0, 6], [0, Math.PI / 2, 0]);
+
 
 
   addHangingArt(scene, 'assets/art18.jpg', [-16, 5, -13]); 
@@ -157,6 +215,56 @@ model.rotation.y = Math.PI / 2;  // 180° to face you
   scene.add(model);
 });
 
+
+// Left wall bench
+addMuseumBench(scene, [-11.2, -0.1, 8], 3.5, Math.PI / 2);
+
+
+// Right wall bench
+addMuseumBench(scene, [11, -0.1, 12], 3.5, Math.PI / 2);
+
+
+gltfLoader.load('assets/flowers_in_vase.glb', gltf => {
+  const model = gltf.scene;
+
+  // Larger vase, more decorative
+  model.scale.set(1.2, 1.2, 1.2);  // Increased size
+
+  // Still near the left bench but better spaced
+  model.position.set(10.5, -0.4, 10.3);
+  
+
+  model.traverse(child => {
+    if (child.isMesh) {
+      child.castShadow = true;
+      child.receiveShadow = true;
+    }
+  });
+
+  scene.add(model);
+});
+
+
+
+gltfLoader.load('assets/flowers_in_vase.glb', gltf => {
+  const model = gltf.scene;
+
+  // Larger vase, more decorative
+  model.scale.set(1.2, 1.2, 1.2);  // Increased size
+
+
+  model.position.set(-10.5, -0.4, 7);
+  
+
+  model.traverse(child => {
+    if (child.isMesh) {
+      child.castShadow = true;
+      child.receiveShadow = true;
+    }
+  });
+
+  scene.add(model);
+});
 
 
 
