@@ -7,7 +7,7 @@ An interactive 3D **Virtual Art Gallery** built using [Three.js](https://threejs
 - Multiple gallery rooms with divider walls and architectural structure
 - High-quality artwork textures placed across walls with correct lighting
 - Realistic lighting setup (ambient + directional lights) with shadows
-- Interactive navigation using OrbitControls
+- Interactive navigation using  PointerLockControls
 - Accurate wall textures (ceiling, floor, glass)
 - Dynamic content loading via modular design (`room.js`, `artworks.js`, `lighting.js`)
 
@@ -18,7 +18,6 @@ An interactive 3D **Virtual Art Gallery** built using [Three.js](https://threejs
 - ES Modules (import/export)
 - JavaScript (ES6+)
 - Texture mapping and materials
-- Scene graph organization
 - Shadow casting and realistic rendering
 
  
