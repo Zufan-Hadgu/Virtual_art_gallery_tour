@@ -268,11 +268,5 @@ gltfLoader.load('assets/flowers_in_vase.glb', gltf => {
 
 
 
-
 }
-
-
-
-
-
 
