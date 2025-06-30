@@ -128,6 +128,7 @@ export function addAllArtworks(scene) {
   // === Room 1: Left Wall (around door)
   addArt(scene, 'assets/art4.jpg', [-11.9, 2.0, -12], [0, Math.PI / 2, 0]);
   addArt(scene, 'assets/art5.jpg', [-11.9, 2.0, 12], [0, Math.PI / 2, 0]);
+  
 
  
   addArt(scene, 'assets/art12.jpg', [11.9, 2.0, -6], [0, -Math.PI / 2, 0]);
@@ -269,4 +270,5 @@ gltfLoader.load('assets/flowers_in_vase.glb', gltf => {
 
 
 }
+
 
